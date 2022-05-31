@@ -8,4 +8,24 @@ In addition, we demonstrate that sampling opposite instances at each iteration r
 Experiments on a broad variety of datasets in AUC maximization confirm the theoretical results. 
 
 # How to Use the Project
-The experiements are solely peroformed on AUC maximization on different datasets, using ouralgorithm and one of the state-of-art algorithm SPAM (Natole, M & Ying, Y., & Lyu,S. 2018 PMLR.) with proximal net as non-smooth regularization function.
+The experiements are solely peroformed on AUC maximization on different datasets, using ouralgorithm and one of the state-of-art algorithm SPAM (Natole, M & Ying, Y., & Lyu,S. 2018 PMLR.) with proximal net as non-smooth regularization function. Given a space $\mathcal{X}\times \mathcal{Y}$ with unknown distribution $\mathcal{P}$ and $\mathcal{Y} = \{+1,-1\}$. A function that takes a sample,e.g. $x\in \mathcal{X}$ drawn independently according to $\mathcal{P}$ and predicts the classes $f:\mathcal{X} \rightarrow \mathcal{Y} $ have AUC score given by:
+
+$AUC(f) := Pr(f(x)>f(x')|y=1,y'=-1)  = E[I_{f(x)>f(x')}|y=1,y'=-1]$
+
+where the expectation is w.r.t. the samples. 
+However given the fact that the formulation above is neither convex nor differentiable, researchers have approximated the AUC by using surrogate convex functions, such as the square function and hinge loss. In addition to the fact that data are often limited and the distribution is unidentifiable, it is impossible to calculate the expectation directly; as a result, we present the empirical AUC score in following with linear model and regularized squared loss function.
+
+$AUC(w) = \frac{1}{2n^+ n^-} \sum_{i\in[n^+],j\in[n^-]} (1 - [w^T(x_i^+  - x_j^-)])^2 + \lambda \Omega(w)$
+
+where $x_i^+$, $x_i^-$ denote the positive and negative examples respectively, $w\in \mathbb{R}^d$ is d-dimensional linear model weight and $\Omega(w)$ is non-smooth but convex regularization. 
+The elastic net  i.e.
+
+$\Omega(w) = \lambda \|w\|^2 + \lambda_1 \|w\|_1$
+
+is considered to have fair compassion with AUC maximization algorithms in literature. However, $l_1$ (lasso) or mixture of both $l_1$ and $l_2$ (group lasso) can be applied. 
+
+# Running The Experiemnts
+
+1- Download the data of interest from LIBSVM 
+{https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/}
+
