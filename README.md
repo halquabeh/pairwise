@@ -28,4 +28,12 @@ is considered to have fair compassion with AUC maximization algorithms in litera
 
 1- Download the data of interest from LIBSVM 
 {https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/}
+Then download LIBSVM tool to import dataset to matlab from 
+{https://www.csie.ntu.edu.tw/~cjlin/libsvm/}.
+
+
+2- Download the code attached above in same root as datasets, moreover add the data to the folder 'data' in the root.
+
+3- Run the algorithm_main.mlx programm to run the experiemnt.
+
 
